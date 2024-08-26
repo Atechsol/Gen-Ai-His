@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/inventory/mail.css') }}">
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+<!-- Navbar -->
+<div class="navbar">
+    <h2>AI Demo</h2>
+    <div class="nav-links">
+        <!-- Add additional links here if needed -->
+        <a href="#">Home</a>
+        
+        
+            <a href="#" class="dropbtn">Logout</a>
+            
+        
+        <a href="#">Contact</a>
+    </div>
+</div>
+<div class="container">
+        <div class="email-form">
+            <h2>Email</h2><p></p>
+            <div class="form-group1">
+                <label for="sender">Sender:</label>
+                <input type="text" id="sender" name="sender" placeholder="Sender email id">
+              </div>
+              <p></p>
+        
+              <div class="form-group2">
+                <label for="recipient">Recipient:</label>
+                <input type="text" id="recipient" name="recipient" placeholder="Recipient email id" value="{{email}}">
+              </div>
+              <p></p>
+              <div class="form-group3">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" placeholder="Subject" value="{{subject}}" >
+              </div><p></p>
+        
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" >{{content}}</textarea>
+        
+            <button type="button" id="sendButton">Send</button>
+          </div>
+        </div>
+        </body>
+        
+      <script src="{{ url_for('static', filename='js/inventory/mail.js') }}"></script>
+   
+  </html>

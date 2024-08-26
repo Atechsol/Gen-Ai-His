@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Your Custom CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/doctor/home.css') }}">
+
+  </head>
+
+<body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>AI Demo</h2>
+        <div class="nav-links">
+            <!-- Add additional links here if needed -->
+            <a href="#">Home</a>
+
+            <div class="dropdown">
+                <a href="/logout" class="dropbtn">Logout</a>
+
+            </div>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <h3>Welcome {{ name }}</h3>
+    <!-- Data Table -->
+    <div class="container mt-5">
+        <p></p>
+        <h3 class="mb-4">Patient Records</h3>
+        <table id="patientTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TIME</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+
+                    <th>Result</th>
+                    <th>
+                        <!-- Logo Image in Header -->
+                        <img src="" alt="" class="header-logo"><!--Place a status logo here-->
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td> {{ loop.index }}</td>
+                    <td>{{ appointment.appointmenttime }}</td>
+                    <td> {{ appointment.patient.firstname }} {{ appointment.patient.lastname }}</td>
+                    <td>{{ appointment.patient.gender }} </td>
+                    
+                    <td>
+                        <input type="file" class="d-none" id="upload-john-doe" onchange="uploadPDF('john-doe')">
+                        <label for="upload-john-doe" class="btn-upload">
+                            <img src="" alt="Upload" class="upload-icon">
+                        </label>
+                        <a href="results/john_doe.pdf" class="result-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('doctor_routes.diagnosis', patient_id=appointment.patient._id) }}" class="btn-icon" title="Edit">
+                            <img src="{{ url_for('static', filename='icons/diagnosis_icon.png') }}" alt="Edit" class="btn-logo">
+                        </a>
+                       
+                </tr>
+                {% endfor %} 
+              
+            </tbody>
+        </table>
+    </div>
+     <!-- Chat popup -->
+     <div class="main-content">
+        <button class="open-button" onclick="openForm()">Chat</button>
+
+        <div class="chat-popup" id="myForm">
+            <form action="javascript:void(0);" class="form-container" onsubmit="sendMessage()">
+                <h1>Chat</h1>
+
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <div class="response-bar" id="responseBar"></div>
+
+                <label for="msg"><b>Message</b></label>
+                <textarea id="msg" placeholder="Type message.." name="msg" required></textarea>
+
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Your Custom JS -->
+    <script src="{{ url_for('static', filename='js/doctor/home.js') }}"></script>
+
+</body>
+
+</html>

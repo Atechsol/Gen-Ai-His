@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+    </style>
+ 
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>Camerin Demo</h2>
+        <div class="nav-links">
+            <!-- Add additional links here if needed -->
+            <a href="#">Home</a>
+            <a href="javascript:void(0);" onclick="openLoginModal()">Login</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Chat popup -->
+    <div class="main-content">
+        <button class="open-button" onclick="openForm()">Chat</button>
+
+        <div class="chat-popup" id="myForm">
+            <form action="javascript:void(0);" class="form-container" onsubmit="sendMessage()">
+                <h1>Chat</h1>
+
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <div class="response-bar" id="responseBar"></div>
+
+                <label for="msg"><b>Message</b></label>
+                <textarea id="msg" placeholder="Type message.." name="msg" required></textarea>
+
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="id01" class="modal">
+        <div class="modal-content animate">
+            <div class="imgcontainer">
+                <span onclick="closeLoginModal()" class="close" title="Close Modal">&times;</span>
+            </div>
+            <h2>WELCOME USER</h2>
+            <form id="loginForm">
+                <div class="container">
+                    <div class="alert alert-danger" role="alert" id="danger-alert" style="display: none;">
+                        A simple danger alert—check it out!
+                    </div>
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+
+                    <button type="submit">Login</button>
+                    <!-- <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label> -->
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="closeLoginModal()" class="cancelbtn">Cancel</button>
+                    <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+</body>
+
+</html>

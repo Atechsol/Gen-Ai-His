@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Demo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/doctor/doc_diagnosis.css') }}">
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+<!-- Navbar -->
+<div class="navbar">
+    <h2>AI Demo</h2>
+    <div class="nav-links">
+        <!-- Add additional links here if needed -->
+        <a href="#">Home</a>
+        
+        
+            <a href="/logout" class="dropbtn">Logout</a>
+            
+        
+        <a href="#">Contact</a>
+    </div>
+</div>
+
+<div class="doctor-info">
+    <h3 class="font_doc">{{ patient.firstname }}</h3> 
+    <p>{{patient.dob}}</p>
+    <p>{{patient.gender}}</p>
+</div>
+ <!-- Main Content -->
+ <div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Large Textbox -->
+        
+            <div class="summary-box">
+                <h4 class="Font1">Medical Summary</h4>
+                <textarea id="userInputTextBox" class="form-control" rows="7"></textarea>
+
+            </div>
+        </div>
+
+      
+    </div>
+</div></div>
+ <!-- Input and Search Box -->
+ 
+ <div class="container">
+    <h4 class="font_doc">Provisional Diagnosis</h4>
+    <div class="sugbox">
+        <textarea id="input" rows="3" placeholder="Start typing..." value="" oninput="inputChange()" placeholder="Type a name here..."></textarea>
+        <ul class="list"></ul>
+        <button id="submitBtn">Submit</button>
+    </div>
+  
+
+</div>
+</div>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/doctor/doc_diagnosis.js') }}"></script>
+</body>
+</html>

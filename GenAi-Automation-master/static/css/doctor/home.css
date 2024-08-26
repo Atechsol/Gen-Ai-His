@@ -1,0 +1,335 @@
+.navbar {
+    background: linear-gradient(to bottom, #0a9ff0, #168b4179); /* Gradient from light blue to a deeper blue */
+    color: white;
+    padding: 14px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar h2 {
+    margin: 0;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    text-shadow: 0 0 8px rgba(204, 204, 204, 0.8); /* Glow effect */
+}
+/* DataTables Customization */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    top: 20p;
+    padding: 0.5em 1em;
+    margin: 0.2em;
+    border-radius: 0.2em;
+    border: 1px solid #ddd;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e2e6ea;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1
+
+}
+.table th,
+.table td {
+    vertical-align: middle !important;
+}
+
+.gender-dropdown {
+    width: 100px;
+}
+
+.result-link {
+    color: #e74c3c;
+    font-size: 1.5em;
+}
+
+.result-link:hover {
+    color: #c0392b;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5em 1em;
+    margin: 0.2em;
+    border-radius: 0.2em;
+    border: 1px solid #ddd;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e2e6ea;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: white;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ccc;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    margin-left: 0.5em;
+}
+
+.icon-upload,
+.icon-view {
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.icon-upload:hover {
+    color: #28a745;
+}
+
+.icon-view:hover {
+    color: #007bff;
+}
+
+/* Custom styling for the upload button */
+.btn-upload {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    position: relative;
+}
+
+.btn-upload:hover {
+    background-color: #e0e0e0;
+}
+
+.container {
+    margin-top: 50px;
+}
+/* Button Container Styling */
+.btn-icon {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 5px;
+    display: inline-flex;
+    align-items: center;
+    
+}
+
+.btn-logo {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+}
+
+.btn-icon:hover .btn-logo {
+    opacity: 0.7; /* Slightly dim the icon on hover */
+}
+
+/* Optional: Add focus styles for accessibility */
+.btn-icon:focus {
+    outline: none; /* Remove default outline */
+}
+
+/* Optional: Add a border or background color for better visibility */
+.btn-icon:active .btn-logo {
+    background-color: #e0e0e0; /* Light background color on click */
+}
+/* Button Container Styling */
+.btn-icon {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 5px; /* Add some padding around the icon */
+    margin: 0 5px; /* Space between buttons */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Center the icon inside the button */
+}
+
+/* Styling for the logo image */
+.btn-logo {
+    width: 80; /* Set the width of the logo */
+    height: 80px; /* Set the height of the logo */
+    object-fit: contain; /* Ensure the image fits well */
+}
+
+/* Optional: Add hover effects */
+.btn-icon:hover .btn-logo {
+    opacity: 0.7; /* Slightly dim the icon on hover */
+}
+
+/* Optional: Add focus styles for accessibility */
+.btn-icon:focus {
+    outline: none; /* Remove default outline */
+}
+
+/* Optional: Add a border or background color for better visibility */
+.btn-icon:active .btn-logo {
+    background-color: #e0e0e0; /* Light background color on click */
+}
+
+
+.chat-popup {
+    display: none; /* Initially hide the chat popup */
+    position: fixed; /* Fixed position for the popup */
+    bottom: 20px; /* Position it at the bottom */
+    right: 20px; /* Position it at the right */
+    z-index: 1000; /* Ensure it stays on top */
+    border: 1px solid #ccc; /* Border for styling */
+    background-color: #fff; /* Background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    border-radius: 25px; /* Rounded corners */
+    width: 300px; /* Width of the popup */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    opacity: 0; /* Start as transparent */
+    transform: translateY(20px); /* Start with a slight offset */
+  }
+  
+  /* Show the chat popup when it's active */
+  .chat-popup.active {
+    display: block; /* Display the popup */
+    opacity: 1; /* Fully opaque */
+    transform: translateY(0); /* Move into view */
+  }
+  
+  /* Styling for the open button */
+  .open-button {
+    background-color: #000000; /* Button background color */
+    color: white; /* Button text color */
+    padding: 16px 20px; /* Padding for the button */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 25px; /* Rounded corners */
+    position: fixed; /* Fixed position for pop-up effect */
+    bottom: 80px; /* Position it above the chat form */
+    right: 20px; /* Align it with the form */
+    z-index: 1000; /* Ensure it stays on top */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+  }
+  
+  .open-button:hover {
+    background-color: #62b6e3; /* Darker green on hover */
+  }
+  
+  /* Chat messages styling */
+  .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto; /* Allow vertical scrolling */
+    max-height: 300px; /* Set maximum height */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f1f1f1; /* Light background color for messages */
+  }
+  
+  /* Message text area styling */
+  textarea {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    resize: none; /* Disable resizing */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow for depth */
+  }
+  
+  /* Send and Close buttons styling */
+  .btn {
+    background-color: #4CAF50; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 15px; /* Padding for buttons */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 10px; /* Space above button */
+    width: 100%; /* Full-width button */
+  }
+  
+  .btn.cancel {
+    background-color: #f44336; /* Red background for cancel button */
+  }
+  
+  .btn:hover {
+    opacity: 0.9; /* Slightly transparent on hover */
+  }
+  

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap CSS -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin/home.css') }}">
+</head>
+
+<body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>AI Demo</h2>
+        <div class="nav-links">
+            <!-- Add additional links here if needed -->
+            <a href="#">Home</a>
+
+            <div class="dropdown">
+                <a href="/logout" class="dropbtn">Logout</a>
+
+            </div>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <h1>Welcome, {{ name }}!</h1>
+    <!-- Main content -->
+    <div class="main-content">
+        <p></p>
+        <div class="icon-boxes">
+            <div class="icon-box" id="box1">
+                <img src="{{ url_for('static', filename='icons/doc_icon.png')}}" alt="Description of Image">
+                <h3>Add doctor</h3>
+                <p>Doctors panel to add doctor</p>
+            </div>
+            <div class="icon-box" id="box2">
+                <img src="{{ url_for('static', filename='icons/inventory_icon.png')}}" alt="Icon 2">
+                <h3>Inventory</h3>
+                <p>Add Inventory user</p>
+            </div>
+            <div class="icon-box" id="box3">
+                <img src="{{ url_for('static', filename='icons/op_icon.png')}}" alt="Icon 3">
+                <h3>OP desk User</h3>
+                <p>New OP user registration.</p>
+            </div>
+            <!-- New icon box -->
+            <div class="icon-box" id="box4">
+                <img src="{{ url_for('static', filename='icons/nurse_icon.png')}}" alt="Icon 4">
+                <!-- Use your own image path -->
+                <h3>Nurses Dock</h3>
+                <p>Add new Nurses</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Box 1 with Registration Form -->
+    <!-- Registration Form Modal for Box 1 -->
+    <div id="registrationModal" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Register New Doctor</h5>
+                    <button type="button" class="custom-close"
+                        onclick="closeModal('registrationModal')">&times;</button>
+                </div>
+                <div class="alert alert-danger" role="alert" id="danger-alert" style="display: none;">
+                    A simple danger alert—check it out!
+                </div>
+                <div class="custom-modal-body">
+                    <form id="registrationForm">
+                        <div class="form-group">
+                            <label for="username">Name</label>
+                            <input type="text" class="form-control" id="name3" name="name" placeholder="Enter username"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="e-mail" placeholder="Enter email"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <select class="form-control" id="department" name="department" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="radiology">Radiology</option>
+                                <!-- Add more departments as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Title/Qualification</label>
+                            <select class="form-control" id="title" name="qualification" required>
+                                <option value="" disabled selected>Select Title/Qualification</option>
+                                <option value="mbbs">MBBS</option>
+                                <option value="md">MD</option>
+                                <option value="do">DO</option>
+                                <option value="ms">MS</option>
+                                <option value="dm">DM</option>
+                                <!-- Add more titles/qualifications as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Enter password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmpassword"
+                                placeholder="Confirm password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Box 2 -->
+    <!-- Modal for Box 2 (New Inventory User Registration) -->
+    <!-- Modal for Box 2 -->
+    <div id="modal2" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Register New Inventory User</h5>
+                    <button type="button" class="custom-close" onclick="closeModal('modal2')">&times;</button>
+                </div>
+                <div class="alert alert-danger" role="alert" id="danger-alert" style="display: none;">
+                    A simple danger alert—check it out!
+                </div>
+                <div class="custom-modal-body">
+                    <form id="registrationFormInventoryUser">
+                        <div class="form-group">
+                            <label for="username2">Name</label>
+                            <input type="text" id="name2" name="name" class="form-control" required
+                                placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="username2">Username:</label>
+                            <input type="text" id="username2" name="username" class="form-control" required
+                                placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="email2">Email:</label>
+                            <input type="email" id="email2" name="e-mail" class="form-control" required
+                                placeholder="Enter Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password2">Password:</label>
+                            <input type="password" id="password2" name="password" class="form-control" required
+                                placeholder="Enter Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword2">Confirm Password:</label>
+                            <input type="password" id="confirmPassword2" name="confirmpassword" class="form-control"
+                                required placeholder="Confirm Password">
+                        </div>
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Box 3 -->
+    <!-- Modal for Box 3 -->
+    <div id="modal3" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Register OP counter user</h5>
+                    <button type="button" class="custom-close" onclick="closeModal('modal3')">&times;</button>
+                </div>
+                <div class="custom-modal-body">
+                    <form id="registrationForm3">
+                        <div class="form-group">
+                            <label for="username3">name:</label>
+                            <input type="text" id="Name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username3">Username:</label>
+                            <input type="text" id="username3" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email3">Email:</label>
+                            <input type="email" id="email3" name="e-mail" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password3">Password:</label>
+                            <input type="password" id="password3" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword3">Confirm Password:</label>
+                            <input type="password" id="confirmPassword3" name="confirmpassword" class="form-control"
+                                required>
+                        </div>
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Box 4 -->
+    <div id="modal4" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Register Nurse</h5>
+                    <button type="button" class="custom-close" onclick="closeModal('modal4')">&times;</button>
+                </div>
+                <div class="custom-modal-body">
+                    <form id="registrationFormNurse">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name1" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username4">Username:</label>
+                            <input type="text" id="username4" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email4">Email:</label>
+                            <input type="email" id="email4" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password4">Password:</label>
+                            <input type="password" id="password4" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword4">Confirm Password:</label>
+                            <input type="password" name="confirmpassword" id="confirmPassword4" class="form-control"
+                                required>
+                        </div>
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <button class="open-button" onclick="openForm()">Chat</button>
+
+    <div class="chat-popup" id="myForm">
+        <form action="javascript:void(0);" class="form-container" onsubmit="sendMessage()">
+            <h1>Chat</h1>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="response-bar" id="responseBar"></div>
+
+            <label for="msg"><b>Message</b></label>
+            <textarea id="msg" placeholder="Type message.." name="msg" required></textarea>
+
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/admin/home.js') }}"></script>
+
+</body>
+
+</html>

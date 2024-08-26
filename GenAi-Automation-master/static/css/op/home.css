@@ -1,0 +1,924 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+          
+            background-color: #000000;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+            border-radius: 25px;
+           
+          ;          }
+          /* Base styles for the chat popup */
+.chat-popup {
+  display: none; /* Initially hide the chat popup */
+  position: fixed; /* Fixed position for the popup */
+  bottom: 20px; /* Position it at the bottom */
+  right: 20px; /* Position it at the right */
+  z-index: 1000; /* Ensure it stays on top */
+  border: 1px solid #ccc; /* Border for styling */
+  background-color: #fff; /* Background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  border-radius: 25px; /* Rounded corners */
+  width: 300px; /* Width of the popup */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  opacity: 0; /* Start as transparent */
+  transform: translateY(20px); /* Start with a slight offset */
+}
+
+/* Show the chat popup when it's active */
+.chat-popup.active {
+  display: block; /* Display the popup */
+  opacity: 1; /* Fully opaque */
+  transform: translateY(0); /* Move into view */
+}
+
+/* Styling for the open button */
+.open-button {
+  background-color: #000000; /* Button background color */
+  color: white; /* Button text color */
+  padding: 16px 20px; /* Padding for the button */
+  border: none; /* Remove border */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 25px; /* Rounded corners */
+  position: fixed; /* Fixed position for pop-up effect */
+  bottom: 80px; /* Position it above the chat form */
+  right: 20px; /* Align it with the form */
+  z-index: 1000; /* Ensure it stays on top */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.open-button:hover {
+  background-color: #62b6e3; /* Darker green on hover */
+}
+
+/* Chat messages styling */
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto; /* Allow vertical scrolling */
+  max-height: 300px; /* Set maximum height */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f1f1f1; /* Light background color for messages */
+}
+
+/* Message text area styling */
+textarea {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  resize: none; /* Disable resizing */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow for depth */
+}
+
+/* Send and Close buttons styling */
+.btn {
+  background-color: #4CAF50; /* Button background color */
+  color: white; /* Button text color */
+  padding: 10px 15px; /* Padding for buttons */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Space above button */
+  width: 100%; /* Full-width button */
+}
+
+.btn.cancel {
+  background-color: #f44336; /* Red background for cancel button */
+}
+
+.btn:hover {
+  opacity: 0.9; /* Slightly transparent on hover */
+}
+
+        /* Container for the boxes */
+
+/* Styling for the icon boxes */
+.icon-boxes {
+  display: flex;
+  justify-content: space-around; /* Evenly spaces out the boxes */
+  margin-top: 20px;
+}
+
+.icon-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px; /* Make the edges rounder */
+  width: 30%; /* Adjust width as needed */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin:10px;
+  cursor: pointer;
+}
+
+.icon-box img {
+  width: 50px;
+  height: 50px;
+}
+
+.icon-box h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.icon-box p {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.icon-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #058835bc; /* Change color on hover */
+}
+
+.icon-box:hover img {
+  filter: brightness(1.2);
+}
+
+.icon-box:hover h3, 
+.icon-box:hover p {
+  color: #000000; /* Change color on hover */
+}
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 600px; /* Maximum width */
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            margin-top: 70px;
+            margin-bottom: 20px;
+            bottom: 10vh;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+            border-radius: 25px;
+            width: 300px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 10px;
+            background-color: white;
+            border-radius: 25px;
+            
+        }
+
+        /* Chat messages container */
+        .chat-messages {
+            flex-grow: 1;
+            max-height: 50vh;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+        }
+
+        /* Individual chat message */
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 5px;
+            background: #979595;
+            border-radius: 15px;
+        }
+        .chat-message.user {
+            background-color: #d1e7dd;
+        }
+
+        .chat-message.backend {
+            background-color: #f8d7da;
+        }
+        /* Full-width textarea */
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: #ffffff;
+            resize: none;
+            min-height: 50px;
+            border-radius: 15px;
+        }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+            background-color: #ffffff;
+            outline: none;
+        }
+
+        /* Set a style for the submit/send button */
+        .form-container .btn {
+            background-color: #117116;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            border-radius: 25px;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: #f00a0a;
+            border-radius: 25px;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+        .navbar {
+            background: linear-gradient(to bottom, #0a9ff0, #168b4179); /* Gradient from light blue to a deeper blue */
+            color: white;
+            padding: 14px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        .main-content {
+            padding-top: 60px; /* Adjust according to the navbar height */
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+          }
+          
+          /* Set a style for all buttons */
+          button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+          }
+          
+          button:hover {
+            opacity: 0.8;
+          }
+          
+          /* Extra styles for the cancel button */
+          .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+          }
+          
+          /* Center the image and position the close button */
+          .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+          }
+          
+          img.avatar {
+            width: 40%;
+            border-radius: 50%;
+          }
+          
+          .container {
+            padding: 16px;
+          }
+          
+          span.psw {
+            float: right;
+            padding-top: 16px;
+          }
+          /* Assuming .container is the parent element */
+          h2 {
+            text-align: center;
+          }
+          /* The Modal (background) */
+          .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgb(255, 255, 255); /* Black w/ opacity */
+            padding-top: 60px;
+          }
+          
+          /* Modal Content/Box */
+          .modal-content {
+            background-color: #d33737;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+          }
+          
+          /* The Close Button (x) */
+          .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+          }
+          
+          .close:hover,
+          .close:focus {
+            color: red;
+            cursor: pointer;
+          }
+          
+          /* Add Zoom Animation */
+          .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+          }
+          
+          @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)} 
+            to {-webkit-transform: scale(1)}
+          }
+            
+          @keyframes animatezoom {
+            from {transform: scale(0)} 
+            to {transform: scale(1)}
+          }
+          
+          /* Change styles for span and cancel button on extra small screens */
+          @media screen and (max-width: 300px) {
+            span.psw {
+               display: block;
+               float: none;
+            }
+            .cancelbtn {
+               width: 100%;
+            }
+          }
+          .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .container input[type=text],
+        .container input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .container button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn {
+            background-color: red;
+        }
+
+        .psw {
+            float: right;
+        }
+        /* General styling for the modal backdrop */
+.custom-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity for backdrop */
+}
+
+/* Centered modal dialog */
+.custom-modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw; /* 90% of viewport width */
+  height: 90vh; /* 90% of viewport height */
+  max-width: 1200px; /* Max width for larger screens */
+  max-height: 800px; /* Max height for larger screens */
+  overflow: hidden; /* Hide overflow */
+  box-sizing: border-box;
+}
+
+/* Content styling */
+.custom-modal-content {
+  height: 100%;
+  background: white;
+  padding: 20px 40px; /* Increased padding for more space around the content */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styling */
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px; /* Increased margin for more space below header */
+}
+
+.custom-modal-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.custom-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #000000;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.custom-close:hover {
+  background-color: #f1f1f1;
+  color: #333;
+}
+/* Form body styling */
+.custom-modal-body {
+  flex: 1; /* Fill remaining space */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Increased gap between columns */
+  margin-bottom: 20px; /* Increased space between rows */
+}
+
+.form-group {
+  flex: 1; /* Equal space for columns */
+  margin-bottom: 10px; /* Space between textboxes and container */
+  padding: 5px; /* Adding some padding for extra space */
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  height: 100px;
+  resize: vertical;
+  width: calc(100% - 10px); /* Full width for textarea minus padding */
+  box-sizing: border-box;
+}
+
+/* Footer with register button */
+.form-footer {
+  display: flex;
+  justify-content: flex-end; /* Align button to right */
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.btn_btn-primary {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* More rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+}
+
+/* Container for token number input and copy button */
+.token-container {
+  position: relative; /* Enables absolute positioning of the button */
+  display: flex; /* Allows the button to be positioned in line with the input */
+  align-items: center; /* Vertically centers the button with the input */
+}
+
+.token-container input {
+  width: 90%; /* Make sure the input takes full width of the container */
+  padding-right: 40px; /* Space for the button inside the input */
+  box-sizing: border-box; /* Ensures padding is included in the total width */
+}
+
+.btn-copy {
+  position: absolute; /* Position the button absolutely within the container */
+  right: 10px;
+  left:250px; /* Adjust the distance from the right edge as needed */
+  top: 30%;
+  transform: translateY(-50%); /* Vertically center the button */
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  color: #333; /* Text color */
+  font-size: 16px; /* Icon size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.btn-copy:hover {
+  color: #4CAF50; /* Change color on hover */
+}
+
+.btn-copy:focus {
+  outline: none; /* Remove default focus outline */
+}
+
+.btn-copy i {
+  margin: 20; /* No margin needed */
+}
+
+
+/* DataTables Customization */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  top: 20p;
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border-radius: 0.2em;
+  border: 1px solid #ddd;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #e2e6ea;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  padding: 0.3em;
+  margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  border: 1
+
+}
+.table th,
+.table td {
+  vertical-align: middle !important;
+}
+
+.gender-dropdown {
+  width: 100px;
+}
+
+.result-link {
+  color: #e74c3c;
+  font-size: 1.5em;
+}
+
+.result-link:hover {
+  color: #c0392b;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.btn {
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border-radius: 0.2em;
+  border: 1px solid #ddd;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #e2e6ea;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: white;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  padding: 0.3em;
+  margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  padding: 0.3em;
+  margin-left: 0.5em;
+}
+
+.icon-upload,
+.icon-view {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.icon-upload:hover {
+  color: #28a745;
+}
+
+.icon-view:hover {
+  color: #007bff;
+}
+
+/* Custom styling for the upload button */
+.btn-upload {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  position: relative;
+}
+
+.btn-upload:hover {
+  background-color: #e0e0e0;
+}
+
+.container {
+  margin-top: 50px;
+}
+/* Button Container Styling */
+.btn-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 5px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-logo {
+  width: 24px; /* Adjust size as needed */
+  height: 24px;
+}
+
+.btn-icon:hover .btn-logo {
+  opacity: 0.7; /* Slightly dim the icon on hover */
+}
+
+/* Optional: Add focus styles for accessibility */
+.btn-icon:focus {
+  outline: none; /* Remove default outline */
+}
+
+/* Optional: Add a border or background color for better visibility */
+.btn-icon:active .btn-logo {
+  background-color: #e0e0e0; /* Light background color on click */
+}
+/* Button Container Styling */
+.btn-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px; /* Add some padding around the icon */
+  margin: 0 5px; /* Space between buttons */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Center the icon inside the button */
+}
+
+/* Styling for the logo image */
+.btn-logo {
+  width: 16px; /* Set the width of the logo */
+  height: 16px; /* Set the height of the logo */
+  object-fit: contain; /* Ensure the image fits well */
+}
+
+/* Optional: Add hover effects */
+.btn-icon:hover .btn-logo {
+  opacity: 0.7; /* Slightly dim the icon on hover */
+}
+
+/* Optional: Add focus styles for accessibility */
+.btn-icon:focus {
+  outline: none; /* Remove default outline */
+}
+
+/* Optional: Add a border or background color for better visibility */
+.btn-icon:active .btn-logo {
+  background-color: #e0e0e0; /* Light background color on click */
+}
+
+
+

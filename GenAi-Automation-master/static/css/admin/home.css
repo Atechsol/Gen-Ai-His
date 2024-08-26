@@ -1,0 +1,616 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+        .open-button {
+            background-color: #000000;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 23px;
+            right: 28px;
+            width: 280px;
+            border-radius: 25px;
+          ;          }
+        /* Container for the boxes */
+
+/* Styling for the icon boxes */
+.icon-boxes {
+  display: flex;
+  justify-content: space-around; /* Evenly spaces out the boxes */
+  margin-top: 20px;
+}
+
+.icon-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px; /* Make the edges rounder */
+  width: 30%; /* Adjust width as needed */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin:10px;
+  cursor: pointer;
+}
+
+.icon-box img {
+  width: 50px;
+  height: 50px;
+}
+
+.icon-box h3 {
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.icon-box p {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.icon-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #058835bc; /* Change color on hover */
+}
+
+.icon-box:hover img {
+  filter: brightness(1.2);
+}
+
+.icon-box:hover h3, 
+.icon-box:hover p {
+  color: #000000; /* Change color on hover */
+}
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 600px; /* Maximum width */
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+
+
+        /* The popup chat - hidden by default */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            margin-top: 70px;
+            margin-bottom: 20px;
+            bottom: 10vh;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+            border-radius: 25px;
+            width: 300px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 10px;
+            background-color: white;
+            border-radius: 25px;
+        }
+
+        /* Chat messages container */
+        .chat-messages {
+            flex-grow: 1;
+            max-height: 50vh;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+        }
+
+        /* Individual chat message */
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 5px;
+            background: #979595;
+            border-radius: 15px;
+        }
+        .chat-message.user {
+            background-color: #d1e7dd;
+        }
+
+        .chat-message.backend {
+            background-color: #f8d7da;
+        }
+        /* Full-width textarea */
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: #ffffff;
+            resize: none;
+            min-height: 50px;
+            border-radius: 15px;
+        }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+            background-color: #ffffff;
+            outline: none;
+        }
+
+        /* Set a style for the submit/send button */
+        .form-container .btn {
+            background-color: #117116;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            border-radius: 25px;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: #f00a0a;
+            border-radius: 25px;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+        .navbar {
+            background: linear-gradient(to bottom, #0a9ff0, #168b4179); /* Gradient from light blue to a deeper blue */
+            color: white;
+            padding: 14px 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        .main-content {
+            padding-top: 60px; /* Adjust according to the navbar height */
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+          }
+          
+          /* Set a style for all buttons */
+          button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+          }
+          
+          button:hover {
+            opacity: 0.8;
+          }
+          
+          /* Extra styles for the cancel button */
+          .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+          }
+          
+          /* Center the image and position the close button */
+          .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+          }
+          
+          img.avatar {
+            width: 40%;
+            border-radius: 50%;
+          }
+          
+          .container {
+            padding: 16px;
+          }
+          
+          span.psw {
+            float: right;
+            padding-top: 16px;
+          }
+          /* Assuming .container is the parent element */
+          h2 {
+            text-align: center;
+          }
+          /* The Modal (background) */
+          .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgb(255, 255, 255); /* Black w/ opacity */
+            padding-top: 60px;
+          }
+          
+          /* Modal Content/Box */
+          .modal-content {
+            background-color: #d33737;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+          }
+          
+          /* The Close Button (x) */
+          .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+          }
+          
+          .close:hover,
+          .close:focus {
+            color: red;
+            cursor: pointer;
+          }
+          
+          /* Add Zoom Animation */
+          .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+          }
+          
+          @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)} 
+            to {-webkit-transform: scale(1)}
+          }
+            
+          @keyframes animatezoom {
+            from {transform: scale(0)} 
+            to {transform: scale(1)}
+          }
+          
+          /* Change styles for span and cancel button on extra small screens */
+          @media screen and (max-width: 300px) {
+            span.psw {
+               display: block;
+               float: none;
+            }
+            .cancelbtn {
+               width: 100%;
+            }
+          }
+          .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .container input[type=text],
+        .container input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .container button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn {
+            background-color: red;
+        }
+
+        .psw {
+            float: right;
+        }
+        .custom-modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1050; /* Sit on top, above other content */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+          padding-top: 60px;
+      }
+      
+      .custom-modal-dialog {
+          max-width: 600px;
+          margin: 5% auto;
+      }
+      
+      .custom-modal-content {
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          padding: 20px;
+          position: relative; /* Ensure that absolute positioning works for children */
+      }
+      
+      .custom-modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px;
+          border-bottom: 1px solid #e5e5e5;
+          background-color: #f7f7f7;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          position: relative; /* Make sure it's the reference for absolute positioning */
+      }
+      
+      .custom-modal-title {
+          margin: 0;
+          font-size: 1.5rem;
+          font-weight: bold;
+      }
+      
+      .custom-close {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #000000;
+          border: none;
+          background: none;
+          cursor: pointer;
+          position: absolute; /* Position it absolutely within the modal header */
+          right: 250px; /* Align it to the right with some padding */
+          top: px; /* Align it to the top with some padding */
+      }
+      
+      .custom-close:hover {
+          color: #ff0000;
+      }
+      
+      .custom-modal-body {
+          padding: 20px;
+      }
+      
+      .form-control {
+          border-radius: 4px;
+          padding: 10px;
+          margin-bottom: 10px;
+      }
+      
+      .btn-primary {
+          background-color: #007bff;
+          border-color: #007bff;
+          width: 100%;
+          padding: 10px;
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 4px;
+      }
+      
+      .btn-primary:hover {
+          background-color: #0056b3;
+          border-color: #0056b3;
+      }
+      
+      .form-group {
+          margin-bottom: 1rem;
+      }
+      .custom-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1050; /* Sit on top, above other content */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+        padding-top: 60px;
+    }
+    
+    .custom-modal-dialog {
+        max-width: 600px;
+        margin: 5% auto;
+    }
+    
+    .custom-modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        position: relative; /* Ensure that absolute positioning works for children */
+    }
+    
+    .custom-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #f7f7f7;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        position: relative; /* Make sure it's the reference for absolute positioning */
+    }
+    
+    .custom-modal-title {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .custom-close {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000000;
+        border: none;
+        background: none;
+        cursor: pointer;
+        position: absolute; /* Position it absolutely within the modal header */
+        right: -250px; /* Align it to the right with some padding */
+        top: 0px; /* Align it to the top with some padding */
+    }
+    
+    .custom-close:hover {
+        color: #ff0000;
+    }
+    
+    .custom-modal-body {
+        padding: 20px;
+    }
+    
+    .form-control {
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 4px;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    

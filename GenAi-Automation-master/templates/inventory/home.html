@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap CSS -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+
+        /* Button used to open the chat form - fixed at the bottom of the page */
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/inventory/home.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+</head>
+
+<body>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>AI Demo</h2>
+        <div class="nav-links">
+            <!-- Add additional links here if needed -->
+            <a href="#">Home</a>
+
+            <div class="dropdown">
+                <a href="/logout" class="dropbtn">Logout</a>
+
+            </div>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <h1>Welcome, {{ name }}!</h1>
+    <!-- Main content -->
+    <div class="main-content">
+        <p></p>
+        <div class="icon-boxes">
+            <div class="icon-box" id="box1">
+                <img src="{{ url_for('static', filename='icons/inventorylist_icon.png')}}" alt="Description of Image">
+                <h3>inventory</h3>
+                <p>View Inventory</p>
+            </div>
+            <div class="icon-box" id="box2">
+                <img src="{{ url_for('static', filename='icons/inventory_icon.png')}}" alt="Icon 2">
+                <h3>Item</h3>
+                <p>Add New Item</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Box 1 with Registration Form -->
+    <!-- Registration Form Modal for Box 1 -->
+    <div id="stockitems" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Register New Doctor</h5>
+                    <button type="button" class="custom-close"
+                        onclick="closeModal('stockitems')">&times;</button>
+                </div>
+                <div class="alert alert-danger" role="alert" id="danger-alert" style="display: none;">
+                    A simple danger alert—check it out!
+                </div>
+                <div class="custom-modal-body">
+                    <div class="container">
+
+                        <div class="row height d-flex justify-content-center align-items-center">
+    
+                          
+    
+                            <h3 class="mb-4">Patient Records</h3>
+                            <table id="stockTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ITEM ID</th>
+                                        <th>ITEM NAME</th>
+                                        <th>QUANTITY</th>
+                                        <th>COST</th>
+                                        <th>EXPIRE</th>
+                                        <th>CATEGORY</th>
+                                        <th>SUPPLIER</th>
+                                        <th>ORDER NOW</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stockTableBody">
+                                    <!-- Data will be populated here by JavaScript -->
+                                </tbody>
+                            </table>
+                            
+                          </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Box 2 -->
+    <!-- Modal for Box 2 (New Inventory User Registration) -->
+    <!-- Modal for Box 2 -->
+    <div id="addnewitem" class="custom-modal">
+        <div class="custom-modal-dialog">
+            <div class="custom-modal-content">
+                <div class="custom-modal-header">
+                    <h5 class="custom-modal-title">Add New Item</h5>
+                    <button type="button" class="custom-close" onclick="closeModal('addnewitem')">&times;</button>
+                </div>
+                
+                <div class="custom-modal-body">
+                    <form id="stockRegistrationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="itemName">Item Name</label>
+                                <input type="text" class="form-control" id="itemName" name="itemName" placeholder="Enter item name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemId">Item ID</label>
+                                <input type="text" class="form-control" id="itemId" name="itemId" placeholder="Enter item ID">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Enter description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input type="text" class="form-control" id="category" name="category" placeholder="Enter category">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unitOfMeasure">Unit of Measure</label>
+                                <input type="text" class="form-control" id="unitOfMeasure" name="unitOfMeasure" placeholder="Enter unit of measure">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="supplier">Supplier</label>
+                                <input type="text" class="form-control" id="supplier" name="supplier" placeholder="Enter supplier">
+                            </div>
+                            <div class="form-group">
+                                <label for="purchaseDate">Purchase Date</label>
+                                <input type="date" class="form-control" id="purchaseDate" name="purchaseDate">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expirationDate">Expiration Date</label>
+                                <input type="date" class="form-control" id="expirationDate" name="expirationDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="cost">Cost</label>
+                                <input type="number" step="0.01" class="form-control" id="cost" name="cost" placeholder="Enter cost">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Email</label>
+                            <input type="e-mail" class="form-control" id="location" name="supplieremail" placeholder="Enter location">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
+                        </div>
+                        <div class="form-group">
+                            <label for="batchNumber">Batch Number</label>
+                            <input type="text" class="form-control" id="batchNumber" name="batchNumber" placeholder="Enter batch number">
+                        </div>
+                        <div class="alert alert-danger" role="alert" id="danger-alert" style="display: none;">
+                            A simple danger alert—check it out!
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">Add Stock</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+     <!-- Chat popup -->
+     <div class="main-content">
+        <button class="open-button" onclick="openForm()">Chat</button>
+
+        <div class="chat-popup" id="myForm">
+            <form action="javascript:void(0);" class="form-container" onsubmit="sendMessage()">
+                <h1>Chat</h1>
+
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <div class="response-bar" id="responseBar"></div>
+
+                <label for="msg"><b>Message</b></label>
+                <textarea id="msg" placeholder="Type message.." name="msg" required></textarea>
+
+                <button type="submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/inventory/home.js') }}"></script>
+   
+</body>
+
+</html>
